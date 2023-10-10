@@ -19,7 +19,23 @@ class PersonDTOTest {
 
         String result = objectMapper.writeValueAsString(person);
 
-        Assertions.assertEquals("{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}", result);
+        Assertions.assertEquals("{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}",
+                result);
+
+    }
+
+    @Test
+    void testDeserialization() throws JsonProcessingException {
+
+        PersonDTO person = new PersonDTO();
+        person.setName("John Doe");
+        person.setAge(30);
+        person.setEmail("john.doe@test.com");
+
+        PersonDTO result = objectMapper.readValue(
+                "{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}", PersonDTO.class);
+
+        Assertions.assertEquals(person, result);
 
     }
 
