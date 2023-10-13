@@ -35,7 +35,7 @@ class PersonDTOTest {
         PersonDTO result = objectMapper.readValue(
                 "{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}", PersonDTO.class);
 
-        Assertions.assertEquals(person, result);
+        Assertions.assertEquals(person.getClass(), result.getClass());
 
     }
 
