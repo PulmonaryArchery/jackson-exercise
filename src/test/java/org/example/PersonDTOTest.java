@@ -22,7 +22,7 @@ class PersonDTOTest {
         JSONAssert.assertEquals("{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}",
                 result);
 
-        
+
 
     }
 
