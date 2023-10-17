@@ -2,42 +2,52 @@ package org.example;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
+
 
 class PersonDTOTest {
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper underTest = new ObjectMapper();
 
     @Test
-    void testSerialization() throws JsonProcessingException {
+    void testSerialization() throws JsonProcessingException, JSONException {
 
+        //given
         PersonDTO person = new PersonDTO();
         person.setName("John Doe");
         person.setAge(30);
         person.setEmail("john.doe@test.com");
 
-        String result = objectMapper.writeValueAsString(person);
+        //when
+        String actual = underTest.writeValueAsString(person);
 
+        //then
         JSONAssert.assertEquals("{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}",
-                result);
-
-
+                actual, JSONCompareMode.LENIENT);
 
     }
 
     @Test
     void testDeserialization() throws JsonProcessingException {
 
+        //given
         PersonDTO person = new PersonDTO();
         person.setName("John Doe");
         person.setAge(30);
         person.setEmail("john.doe@test.com");
 
-        PersonDTO result = objectMapper.readValue(
+        //when
+        PersonDTO actual = underTest.readValue(
                 "{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}", PersonDTO.class);
 
-        Assertions.assertEquals(person.getClass(), result.getClass());
+        //then
+        Assertions.assertEquals(actual.getName(), person.getName());
+        Assertions.assertEquals(actual.getAge(), person.getAge());
+        Assertions.assertEquals(actual.getEmail(), person.getEmail());
 
     }
 
