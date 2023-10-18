@@ -13,7 +13,7 @@ class AddressDtoTest {
     ObjectMapper underTest = new ObjectMapper();
 
     @Test
-    void testSerialization() throws JsonProcessingException, JSONException {
+    void testSerialization() throws Exception {
 
         //given
         AddressDto address = new AddressDto();
@@ -33,7 +33,7 @@ class AddressDtoTest {
     }
 
     @Test
-    void testDeserialization() throws JsonProcessingException {
+    void testDeserialization() throws Exception {
 
         //given
         AddressDto address = new AddressDto();
@@ -49,11 +49,7 @@ class AddressDtoTest {
                         "\"council\":\"Example Council\",\"postcode\":\"123 4567\"}", AddressDto.class);
 
         //then
-        Assertions.assertEquals(address.getAddressLine1(), actual.getAddressLine1());
-        Assertions.assertEquals(address.getAddressLine2(), actual.getAddressLine2());
-        Assertions.assertEquals(address.getCity(), actual.getCity());
-        Assertions.assertEquals(address.getCouncil(), actual.getCouncil());
-        Assertions.assertEquals(address.getPostcode(), actual.getPostcode());
+        Assertions.assertEquals(address, actual);
 
     }
 

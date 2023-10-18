@@ -14,7 +14,7 @@ class PersonDTOTest {
     ObjectMapper underTest = new ObjectMapper();
 
     @Test
-    void testSerialization() throws JsonProcessingException, JSONException {
+    void testSerialization() throws Exception {
 
         //given
         PersonDTO person = new PersonDTO();
@@ -32,7 +32,7 @@ class PersonDTOTest {
     }
 
     @Test
-    void testDeserialization() throws JsonProcessingException {
+    void testDeserialization() throws Exception {
 
         //given
         PersonDTO person = new PersonDTO();
@@ -45,9 +45,7 @@ class PersonDTOTest {
                 "{\"name\":\"John Doe\",\"age\":30,\"email\":\"john.doe@test.com\"}", PersonDTO.class);
 
         //then
-        Assertions.assertEquals(actual.getName(), person.getName());
-        Assertions.assertEquals(actual.getAge(), person.getAge());
-        Assertions.assertEquals(actual.getEmail(), person.getEmail());
+        Assertions.assertEquals(actual, person);
 
     }
 

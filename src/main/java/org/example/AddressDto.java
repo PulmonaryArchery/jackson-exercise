@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Objects;
+
 public class AddressDto {
 
     private String addressLine1;
@@ -46,5 +48,18 @@ public class AddressDto {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddressDto that = (AddressDto) o;
+        return getAddressLine1().equals(that.getAddressLine1()) && getAddressLine2().equals(that.getAddressLine2()) && getCity().equals(that.getCity()) && getCouncil().equals(that.getCouncil()) && getPostcode().equals(that.getPostcode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAddressLine1(), getAddressLine2(), getCity(), getCouncil(), getPostcode());
     }
 }
